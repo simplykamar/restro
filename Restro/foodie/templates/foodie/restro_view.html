@@ -1,0 +1,121 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+
+{%block title%}Order food online from India's best restaurant. {{restro_item.0.restro.name|title}} {%endblock%}
+
+{%block body%}
+<section>
+<div class="container-fluid">
+	<small class="font-weight-bolder m-0 text-dark bg-light">Home / {{restro_item.0.restro.location.city.name|title}} / <span id="get-restro-location">{{restro_item.0.restro.location.name|title}}</span> / <a href="/foodie/restro-view/{{restro_item.0.restro.id}}/" class="text-dark" id="get-restro-name">{{restro_item.0.restro.name|title}}</a></small>
+</div>
+<input type="hidden" id="get-restro-id" value="{{restro_item.0.restro.id}}">
+<main class="mb-5">
+<div class="bg-dark text-white">
+	<div class="container">
+		<div class="row p-5">
+			<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+				<img src="/media/{{restro_item.0.restro.pic}}" class="img-fluid restro-img">
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+				<h4>{{restro_item.0.restro.name|title}}</h4>
+				<p>{{restro_item.0.restro.desc|title}}</p>
+				<p>{{restro_item.0.restro.location.name|title}}</p>
+				<div class="d-flex justify-content-between">
+					<span class="font-weight-bolder">{{restro_item.0.restro.rating}}</span>
+					<span class="font-weight-bolder">₹ {{restro_item.0.restro.price_for_two}} for two</span>
+				</div>
+				{%if restro_item.0.restro.type == "both"%}
+					<p>Veg & Non-Veg</p>
+				{%elif restro_item.0.restro.type == "veg"%}
+					<p>Pure Veg</p>
+				{%else%}
+					<p>Non-Veg</p>
+				{%endif%}
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+				{%if restro_item.0.restro.discount%}
+					<div class="border border-white p-2">
+						<h5 class="font-weight-bolder">OFFER</h5>
+						<p>{{restro_item.0.restro.discount}}% off on regular price | Use coupon RESTROIT</p>
+					</div>
+				{%endif%}
+				{% if favourite%}
+					<a href="/foodie/remove-favourite/{{restro_item.0.restro.id}}" class="text-decoration-none"><i class="fas fa-heart text-danger"></i> Favourited </a>
+				{%else%}
+					<a href="/foodie/add-favourite/{{restro_item.0.restro.id}}" class="text-decoration-none text-white"><i class="fas fa-heart"></i> Favourite </a>
+				{%endif%}
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="row mt-5">
+					{%for item in restro_item%}
+						<div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-5 mb-md-0 mb-lg-0">
+								<div class="card">
+									<img src="/media/{{item.pic}}" class="img-fluid card-img-top item-img" id="item{{item.id}}pic">
+									{%if item.label%}
+										<span class="badge badge-danger restro-item-tag p-2">{{item.label|upper}}</span>
+									{%endif%}
+									<div class="card-body">
+										<h5 class="card-title">
+										{%if item.type == "veg"%}
+											<i class="far fa-stop-circle text-success"></i>
+										{%else%}
+											<i class="far fa-stop-circle text-danger"></i>	
+											{%endif%}
+										<span id="item{{item.id}}name">{{item.name|title}}</span>
+										</h5>
+										<p class="text-secondary">{{restro_item.0.category|title}}</p>
+										<div class="d-flex justify-content-between">
+											<p class="card-title font-weight-bolder" id="item{{item.id}}price">₹ {{item.price}}</p>
+											<div id="addeditem{{item.id}}">
+												<button class="btn border px-4 cart" id="item{{item.id}}">
+													<span class="text-success font-weight-bolder">ADD</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+						{%if forloop.counter|divisibleby:3 and not forloop.last%}
+							</div><div class="row mt-5">
+						{%endif%}
+					{%endfor%}
+				</div>
+			</div>
+		<div class="col-lg-3">
+			<div class="pt-5 sticky-top">
+				<div class="cart-available">
+					<h4 class="font-weight-bolder">Cart</h4>
+					<p id="cartitem"></p>
+					<div id="cart-from-diff-restro"></div>
+				</div>
+				<div id="sidebarcart">
+					<!--if cart is empty than show empty cart by jquery--> 
+					<!--if cart is available than show cart by jquery-->
+				</div>
+				<div class="cart-available">
+					<div class="d-flex justify-content-between font-weight-bolder mt-3">
+						<span>Subtotal</span><span id="carttotal"></span>
+					</div>
+	 				<p class="text-secondary">Extra charges may apply</p>
+					<a href="/foodie/checkout-step-1" class="btn btn-success btn-block mt-5">CHECKOUT -></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+</main>
+</section>
+
+{%endblock%}
+
+{%block js%}
+	
+
+
+{%endblock%}

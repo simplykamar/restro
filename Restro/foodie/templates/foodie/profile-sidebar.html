@@ -1,0 +1,20 @@
+<div class="col-lg-3 col-md-6 col-sm-12 col-12">
+			<div class="sticky-top">
+				<div class="bg-white">
+					<div class="px-5 pt-5 text-center">
+						<i class="fas fa-user fa-5x
+						 "></i>
+						<small class="font-weight-bolder mt-3 d-block">Abhishek Sharma</small>
+						<small class="text-muted d-block">+91 9045371255</small>
+						<small class="text-muted d-block">abhishek@123gmail.com</small>
+						<a href="#" class="font-weight-bolder text-decoration-none text-danger"><i class="fas fa-pencil-alt mt-3"></i> Edit</a>
+					</div><hr>
+					<div class="pl-3 pb-3 mt-4 custom-active">
+						<a href="/foodie/orders" class="list-group-item border-0 {% if request.path == '/foodie/orders' %} active {%endif%} text-decoration-none text-dark py-3"><i class="fas fa-store"></i> Orders</a>
+						<a href="/foodie/favourites" class="list-group-item border-0 {% if request.path == '/foodie/favourites' %} active {%endif%} text-decoration-none text-dark  py-3"><i class="fab fa-gratipay"></i> Favourites</a>
+						<a href="/foodie/payments" class="list-group-item border-0 text-decoration-none text-dark  py-3"><i class="fas fa-credit-card"></i> Payments</a>
+						<a href="/foodie/addresses" class="list-group-item border-0 {% if request.path == '/foodie/addresses' %} active {%endif%} text-decoration-none text-dark  py-3"><i class="fas fa-map-marker-alt"></i> Addresses</a>
+					</div>
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,51 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<link rel="stylesheet" type="text/css" href="{%static 'account/css/style.css'%}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+	{%if messages%}
+		{% for msg in messages%}
+			<div class="container-fluid  text-danger alert alert-danger alert-dismissible mt-3">
+				<button class="close" data-dismiss="alert">&times;</button>
+				{{msg}}
+			</div>
+		{%endfor%}
+	{%endif%}
+	<div class="row no-gutters">
+		<div class="col-lg-6 col-md-8 col-sm-12 col-12 d-none d-lg-block d-md-block">
+			<img src="{%static 'account/img/register.jpg'%}" class="img-fluid login-img">
+		</div>
+		<div class="col-lg-6 col-md-4 my-5">
+			<div class="p-5">
+			<h4 class="font-weight-lighter mb-4">Welcome back!</h4>
+			<form action="/account/login/" method="post">{%csrf_token%}
+				<div class="form-group">
+					<label for="email_or_tel">Registered Email or Contact Number</label>
+					<input type="text" name="email_or_tel" class="form-control rounded-input" required="true">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Password</label>
+					<input type="password" name="pwd" class="form-control rounded-input" required="true">
+				</div>
+				<div class="mt-4">
+					<input type="submit" class="btn btn-outline-danger btn-block py-3" value="SIGN UP">
+					<div class="text-center mt-3">
+						Don't have an account? <a href="/account/register" class="text-decoration-none text-danger font-weight-bolder">Register</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

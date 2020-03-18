@@ -1,0 +1,81 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{%block title%}	{%endblock%}</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="{%static 'restroadmin/css/style.css'%}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<nav class="navbar navbar-light bg-light navbar-expand-sm py-0">
+	<a href="/restaurant/dashboard" class="navbar-brand" style="color: #9000d6;"><i class="fas fa-store-alt"></i> Restaurant Dashboard</a>
+	<button class="navbar-toggler" data-toggle="collapse" data-target="#mynav"><span class="navbar-toggler-icon"></span></button>
+	<div class="collapse navbar-collapse" id="mynav">
+		<ul class="navbar-nav ml-auto mr-5 text-center">
+			<li class="nav-item"><a href="/restaurant/dashboard" class="nav-link {%block dashboard-active%}{%endblock%}">Dashboard</a></li>
+			<li class="nav-item"><a href="#" class="nav-link mx-lg-1 mx-md-1" data-toggle="popover" data-content="kjnk" data-placement="bottom" data-html="true" data-trigger="click">
+			Notification <i class="fas fa-bell"></i><sup><span id="set-notification" class="bg-danger text-white px-2 py-1 rounded">0</span></sup></a></li>
+
+			<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{request.user.restroprofile.restro.name|title}}</a>
+					<div class="dropdown-menu">
+						<a href="#" class="dropdown-item"><i class="fas fa-user-cog"></i> Profile</a>
+						<a href="/restaurant/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+					</div>
+					</li>
+		</ul>
+	</div>
+</nav>
+{%block body%}
+
+{%endblock%}
+<footer>
+	<h4>Copyright &copy; 2020</h4>
+	<p class="text-muted">Restaurant Login System</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  	$('[data-toggle="popover"]').popover();
+	getNotification();
+	function getNotification(){
+		$.ajax({
+		url:"/restaurant/notification",
+		type:"get",
+		success:function(response_data){
+			response_data=response_data["notification"]
+			console.log(response_data);
+			if (Object.keys(response_data).length==0){
+				$('[data-toggle="popover"]').attr('data-content',"<p>You don't have any Notification</p>");
+				console.log("yes")
+			}
+			else{
+				setNotification(response_data);
+				}
+			setTimeout(getNotification,2000);
+			}
+		});
+	}
+	function setNotification(data){
+	let q="<p class='bg-primary text-white py-2 text-center'>ALERTS CENTER</p>";
+	let count=0
+	for(let noti in data){
+		q+=`<a href="/restaurant/order-detail/${data[noti]["order_received_id"]}" class="list-group-item list-group-item-action text-capitalize">
+		${data[noti]["name"]}</a>`;
+		count+=1;
+		}
+	$('[data-toggle="popover"]').attr('data-content',q);
+	$('#set-notification').html(count);
+	}
+});
+	{%block js%}
+	
+	{%endblock%}
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+
+{%block title%}Order food online from India's best restaurant	{%endblock%}
+
+{%block body%}
+<section>
+<div class="bg-gray">
+	<div class="container">
+	<div class="row py-5">
+		{%include 'foodie/profile-sidebar.html'%}
+ 		<div class="col-lg-9 col-md-6 col-sm-12 col-12">
+			<div class="p-4 bg-white">
+				<h4 class="font-weight-bolder">Favourites</h4>
+				<div class="row mt-5">
+				{%for restro in favourite_restro%}
+					<div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-5 mb-md-0 mb-lg-0  restro-card">
+						<a href="/foodie/restro-view/{{restro.id}}" class="text-dark">
+							<div class="card">
+								<img src="/media/{{restro.pic}}" class="img-fluid card-img-top restro-img">
+								<span id="favourite-icon" class="text-danger"><i class="fab fa-gratipay fa-2x"></i></span>
+								<div class="card-body">
+									<h5 class="card-title">{{restro.name|title}}</h5>
+									<p>{{restro.desc}}</p>
+									<div class="d-flex justify-content-between">
+										{%if restro.rating > 3.8%}
+											<span class="badge badge-success">
+										{%else%}
+											<span class="badge badge-danger">
+										{%endif%}
+											<i class="fas fa-star"></i> {{restro.rating}}
+											</span>
+										<span> - </span>
+										<span>₹{{restro.price_for_two}} For Two</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					{%if forloop.counter|divisibleby:3 and not forloop.last%}
+						</div><div class="row mt-5">
+					{%endif%}
+				{%endfor%}
+			</div>
+				</div>
+			</div>
+		</div>
+</div>
+</div>
+</div>
+</section>
+
+{%endblock%}

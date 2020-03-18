@@ -1,0 +1,118 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+
+{%block title%}	Order food online from India's best restaurant{%endblock%}
+
+{%block body%}
+<section>
+<div id="checkout-cart-empty" class="text-center p-5">  </div>
+<div class="bg-gray p-4" id="checkout-cart-available">
+	<div class="row">
+		<div class="col-lg-8"> 
+			<div class="container">
+				<a href="/foodie/checkout-step-1" class="text-dark text-decoration-none">
+				<div class="bg-white p-4 d-flex justify-content-between">
+					<div>
+						<h4 class="mb-4">Delivery address<i class="fas fa-check-circle ml-3 text-success"></i></h4>
+						<p class="d-inline font-weight-bolder">
+						{%if address.tag == "home" %}
+							<i class="fas fa-home mr-2"></i>
+						{%elif address.tag == "work" %}
+							<i class="fas fa-briefcase mr-2"></i>
+						{%else%}
+							<i class="fas fa-map-marker-alt mr-2"></i>
+						{%endif%}
+						{{address.tag|title}}
+						</p>
+						<p class="text-secondary font-weight-bolder">{{address.address|title}}</p>
+					</div>
+					<div>
+						<p class="text-danger font-weight-bolder">Change</p>
+					</div>
+				</div>
+				</a>
+				<div class="bg-white p-4 mt-3">
+					<h4>Choose payment method</h4>
+					<p>Accepted Cards</p>	
+					<i class="fab fa-cc-visa fa-2x text-primary"></i>
+					<i class="fab fa-cc-paypal fa-2x mx-2 text-success"></i>
+					<i class="fas fa-credit-card fa-2x text-danger" ></i>
+					<i class="fab fa-cc-mastercard fa-2x ml-2 text-warning"></i>
+						<form action="/foodie/checkout-step-2/{{address.id}}" method="post">{%csrf_token%}
+							<input type="hidden" name="cart-item-json" id="cart-item-json">
+							<div class="d-block my-3">
+					          <div class="custom-control custom-radio">
+					            <input id="credit" name="payment-mode" type="radio" class="custom-control-input" checked="" required="" value="credit card">
+					            <label class="custom-control-label" for="credit">Credit card</label>
+					          </div>
+					          <div class="custom-control custom-radio">
+					            <input id="debit" name="payment-mode" type="radio" class="custom-control-input" required="" value="debit card">
+					            <label class="custom-control-label" for="debit">Debit card</label>
+					          </div>
+					          <div class="custom-control custom-radio">
+					            <input id="paypal" name="payment-mode" type="radio" class="custom-control-input" required="" value="paypal">
+					            <label class="custom-control-label" for="paypal">PayPal</label>
+					          </div>
+					        </div>
+					        <div class="row">
+					          <div class="col-md-6 mb-3">
+					            <label for="card-name">Name on card</label>
+					            <input type="text" class="form-control" id="card-name" name="card-name" placeholder="Kamar Alam" required="">
+					            <small class="text-muted">Full name as displayed on card</small>
+					            <div class="invalid-feedback">
+					              Name on card is required
+					            </div>
+					          </div>
+					          <div class="col-md-6 mb-3">
+					            <label for="card-number">Card number</label>
+					            <input type="text" class="form-control" id="card-number" name="card-number" placeholder="1111-2222-3333-4444" required="">
+					            <div class="invalid-feedback">
+					              Credit card number is required
+					            </div>
+					          </div>
+					        </div>
+					        	<div class="row">
+						          <div class="col-md-4 mb-3">
+						            <label for="card-exp-month">EXP Month</label>
+						            <input type="number" class="form-control" id="card-exp-month" name="card-exp-month"  placeholder="04" required="">
+						            <div class="invalid-feedback">
+						              Expiration date required
+						            </div>
+						          </div>
+						          <div class="col-md-4 mb-3">
+						            <label for="card-exp-year">EXP Year</label>
+						            <input type="number" class="form-control" id="card-exp-year" name="card-exp-year"  placeholder="2022" required="">
+						            <div class="invalid-feedback">
+						              Expiration date required
+						            </div>
+						          </div>
+						          <div class="col-md-4 mb-3">
+						            <label for="card-cvv">CVV</label>
+						            <input type="number" class="form-control" id="card-cvv" name="card-cvv"  placeholder="352" required="">
+						            <div class="invalid-feedback">
+						              Security code required
+						            </div>
+						          </div>
+						        </div>
+						<div class="text-right">
+							<button type="submit" class="btn btn-outline-success mt-3 px-5">PROCEED TO PAY -></button>
+						</div>
+					</form>
+				</div>
+		</div>
+	</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 bg-white border p-4">
+			{%include "foodie/sticky-cart.html"%}
+		</div>
+	</div>
+</div>
+</section>
+
+{%endblock%}
+
+
+{%block js%}
+let item_json=JSON.parse(localStorage.getItem('cart'))
+$('#cart-item-json').val(JSON.stringify(item_json));
+
+{%endblock%}

@@ -1,0 +1,41 @@
+{%extends 'foodie/base.html'%}
+{%block title%}Order food online from India's best restaurant {%endblock%}
+{%block body%}
+<div class="bg-gray p-4">
+<div class="col-lg-6 mx-auto">
+	<h4 class="my-3">Save delivery location</h4>
+	<form action="/foodie/add-address/" method="post" class="bg-white p-4">{%csrf_token%}
+		<div class="form-group">
+			<label for="address">COMPLETE ADDRESS</label>
+			<input type="text" name="address" class="form-control" placeholder="Complete address e.g house number, street name, landmark" required="true">
+		</div>
+		<div class="form-group">
+			<label for="area">DELIVERY AREA</label>
+			<input type="text" name="area" class="form-control" required="true" placeholder="Delivery Area">
+		</div>
+		<div class="form-group">
+			<label for="landmark">LANDMARK</label>
+			<input type="text" name="landmark" class="form-control" placeholder="Landmark if any">
+		</div>
+		<div class="form-group">
+			<label for="tag">TAG AS</label><br>
+		<div class="custom-control custom-radio custom-control-inline">
+		  <input type="radio" id="home" name="tag" class="custom-control-input" value="home" required="true">
+		  <label class="custom-control-label" for="home"><i class="fas fa-home"></i> Home</label>
+		</div>	
+		<div class="custom-control custom-radio custom-control-inline">
+		  <input type="radio" id="work" name="tag" class="custom-control-input" value="work" required="true">
+		  <label class="custom-control-label" for="work"><i class="fas fa-briefcase"></i> Work</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+		  <input type="radio" id="other" name="tag" class="custom-control-input" value="other" required="true">
+		  <label class="custom-control-label" for="other"><i class="fas fa-map-marker-alt"></i> Other</label>
+		</div>
+		</div>
+		<div class="text-right">
+			<input type="submit" value="SAVE AND PROCEED" class="btn btn-success px-3">
+		</div>
+	</form>
+</div>
+</div>
+{%endblock%}

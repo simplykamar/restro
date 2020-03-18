@@ -1,0 +1,13 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+{%block title%} Page you are trying to access, doesn't exist. {%endblock%}
+{%block body%}
+<div class="bg-light p-5">
+<div class="text-center p-5">
+	<img src="{%static 'foodie/img/404.jpg'%}">
+	<h2 class="">Page not found</h2>
+	<small class="text-muted d-block my-3"> Uh-oh! Look like the page you are trying to access, doesn't exist.<br> Please start a freash.</small>
+	<a href="/foodie" class="btn btn-danger px-4 py-2">GO HOME</a>
+</div>
+</div>
+{%endblock%}

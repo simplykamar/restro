@@ -1,0 +1,32 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+{%block title%} Order food online from India's best restaurant {%endblock%}
+{%block body%} 
+<section>
+<div class="container-fluid">
+	<small class="font-weight-bolder m-0 text-dark bg-light">Home / Track</small>
+</div>
+<div class="p-5 bg-gray">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-md-12 col-sm-12 col-12 ">
+			<form class="p-5 bg-white shadow mt-2">
+				<div class="form-group row">
+					<div class="col-lg-6">
+					<label for="order_no">Order Number</label>
+					<input type="number" name="order_no" class="form-control" placeholder="Your Order Number" min="1">
+					</div>
+				</div>
+				<input type="submit" class="btn btn-danger px-3 mt-2" value="Track">
+			</form>
+		</div>
+		<div class="col-lg-4 d-none d-lg-block">
+			<h5>Track your order by using order number.</h5>
+			<img src="{%static 'foodie/img/food-delivery-bike.jpg'%}" class="img-fluid">
+		</div>
+
+	</div>
+</div>
+</div>
+</section>
+{%endblock%}

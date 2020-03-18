@@ -1,0 +1,79 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+{%block title%}	Order food online from India's best restaurant {%endblock%}
+
+{%block body%}
+												<!--Navbar-->
+<section>
+<div id="cover" class="p-5">
+	<div class="text-center">
+		<img src="{%static 'foodie/img/logo.JPG'%}" class="cover_logo">
+		<h4 class="text-white my-4">Find Your Favroite Delicious hot Food..!</h4>	
+		<form action="search/" method="post">{%csrf_token%}
+			<select class="form-control-lg col-lg-2 col-md-2 col-sm-12 col-12" name="city">
+				{%for c in city%}
+					<option>{{c.name}}</option>
+				{%endfor%}
+			</select>
+			<input type="search" name="search" class="form-control-lg col-lg-4 col-md-4 col-sm-12 col-12 my-2" required="true">
+			<input type="submit" value="Search" class="btn btn-danger btn-lg mb-2 col-lg-1 col-md-1 col-sm-12 col-12">
+		</form>
+		<div class="mt-3 d-none d-md-block d-lg-block">
+			<i class="fas fa-home fa-4x text-white"></i><span class="badge badge-danger mx-5">1</span>
+			<i class="fas fa-concierge-bell fa-4x text-white"></i><span class="badge badge-danger mx-5">2</span>
+			<i class="fas fa-motorcycle fa-4x text-white"></i><span class="badge badge-danger ml-4">3</span>
+			<div class="d-flex justify-content-center cover_content">
+				<p class="text-white">Choose location</p>
+				<p class="text-white">Order Food</p>
+				<p class="text-white">Delivery</p>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+<section>
+	<div class="bg-light p-5">
+		<div class="carousel slide container" data-ride="carousel" id="mycarousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer1.jpg'%}" class="img-fluid">
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer2.jpg'%}" class="img-fluid">
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer3.jpg'%}" class="img-fluid">
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer4.jpg'%}" class="img-fluid">
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer5.jpg'%}" class="img-fluid">
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-4">
+							<img src="{%static 'foodie/img/offer6.jpg'%}" class="img-fluid">
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#mycarousel" data-slide="prev" class="carousel-control-prev">
+				<span class="carousel-control-prev-icon mr-5"></span>
+			</a>
+			<a href="#mycarousel" data-slide="next" class="carousel-control-next">
+				<span class="carousel-control-next-icon ml-5"></span>
+			</a>
+		</div>
+	</div>
+	<div class="container-fluid my-5">
+	<a href="#"><img src="{%static 'foodie/img/first-time-offer.jpg'%}" class="img-fluid banner_img"></a>
+</div>
+</section>
+
+{%endblock%}

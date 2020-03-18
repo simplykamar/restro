@@ -1,0 +1,87 @@
+{%extends "restroadmin/base.html"%}
+
+{%block title%}	{%endblock%}
+
+{%block dashboard-active%}active{%endblock%}
+
+{%block body%}
+
+<div class="p-5 bg-gray">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 box-div">
+			<a href="/restaurant/orders" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 shadow box-1 box">
+					<h4 class="">TOTAL ORDER</h4><hr class="bg-white">
+					<i class="fas fa-th-list fa-4x float-right"></i>
+					<h2 class="d-inline">{{total_order}}</h2>
+					<small class="d-block">Total Order</small>
+
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 my-5 my-lg-0 my-md-0  box-div">
+			<a href="#" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 shadow box-2 box">
+					<h4 class="">CONFIRMED ORDER</h4><hr class="bg-white">
+					<i class="fas fa-check fa-4x float-right"></i>
+					<h2 class="d-inline">{{order_confirmed}}</h2>
+					<small class="d-block">Confirmed Order</small>
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 box-div">
+			<a href="#" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 shadow box-3 box">
+					<h4 class="">CANCELLED ORDER</h4><hr class="bg-white">
+					<i class="far fa-times-circle text-danger fa-4x float-right"></i>
+					<h2 class="d-inline">{{cancelled_order}}</h2>
+					<small class="d-block">Cancelled Order</small>
+				</div>
+			</a>
+		</div>
+	</div>
+
+		<div class="row mt-5 mb-3">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 box-div">
+			<a href="#" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 shadow box-4 box">
+					<h4 class="">FOOD BEING PREPARED</h4><hr class="bg-white">
+					<i class="fas fa-utensils fa-4x float-right"></i>
+					<h2 class="d-inline">{{order_being_prepared}}</h2>
+					<small class="d-block">Food Being Prepared</small>
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 my-5 my-lg-0 my-md-0 box-div">
+			<a href="#" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 bg-white shadow box-5 box">
+					<h4 class="">FOOD PICKUP</h4><hr class="bg-white">
+					<i class="fas fa-motorcycle fa-4x float-right"></i>
+					<h2 class="d-inline">{{order_pickup}}</h2>
+					<small class="d-block">Food Pickup</small>
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-12 box-div">
+			<a href="#" class="text-decoration-none">
+				<div class="px-4 pb-5 pt-3 bg-white shadow box-6 box">
+					<h4 class="">TOTAL FOOD DELIVERED</h4><hr class="bg-white">
+					<i class="fas fa-check-double fa-4x float-right"></i>
+					<h2 class="d-inline">{{delivered_order}}</h2>
+					<small class="d-block">Total Food Deliver</small>
+				</div>
+			</a>
+		</div>
+	</div>
+
+</div>
+</div>
+
+{%endblock%}
+{%block js%}
+
+
+{%endblock%}
+
+

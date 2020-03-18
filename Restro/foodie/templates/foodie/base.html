@@ -1,0 +1,83 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{%block title%} {%endblock%}</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{%static 'foodie/css/style.css'%}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light">
+	<a href="/foodie" class="navbar-brand text-danger font-weight-bolder ml-3">Restro</a>
+	<button class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="mynav">
+		<ul class="navbar-nav text-center ml-auto mr-lg-5">
+			<li class="nav-item"><a href="/foodie/checkout-step-1" class="nav-link"><span id="navbar-cart" class="px-1 rounded bg-success text-white font-weight-bolder">0</span> Cart</a></li>
+			{%if user.is_authenticated%}
+				<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="far fa-user"></i> {{user.username|title}}</a>
+				<div class="dropdown-menu">
+					<a href="/foodie/orders" class="dropdown-item">Profile</a>
+					<a href="/foodie/orders" class="dropdown-item">Orders</a>
+					<a href="/foodie/favourites" class="dropdown-item">Favourite</a>
+					<a href="/foodie/addresses" class="dropdown-item">Addresses</a>
+					<a href="/account/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+				</div>
+				</li>
+				{%else%}
+				<li class="nav-item"><a href="/account/login" class="nav-link">Login</a></li>
+				<li class="nav-item"><a href="/account/register" class="nav-link">Register</a></li>
+			{%endif%}
+		</ul>
+	</div>	
+</nav>
+{%block body%}
+
+{%endblock%}
+<footer>
+	<div class="row mr-0 text-center">
+		<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+			<a href="#">
+				<img src="{%static 'foodie/img/logo.JPG'%}" class="img-fluid cover_logo">
+			</a>	
+			<h4 class="text-danger font-weight-bolder">Food Ordering System</h4>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+			<h4 class="text-white font-weight-bolder footer-menu">About Us</h4><hr class="bg-white">
+			<a href="#" class="text-white footer-text"> >>About us</a>
+			<a href="#" class="text-white footer-text"> >>Contact us</a>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+			<h4 class="text-white font-weight-bolder footer-menu">My Account</h4><hr class="bg-white">
+			<a href="#" class="text-white footer-text"> >>My Profile</a>
+			<a href="#" class="text-white footer-text"> >>My Cart</a>
+			<a  href="#" class="text-white footer-text"> >>My Order</a>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-12">
+			<p class="text-white font-weight-bolder">SUBSCRIBE TO OUR NEWSLETTER</p><hr class="bg-white">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="email" name="newsletter-email" class="form-control" placeholder="please enter your email">
+					<input type="submit" class="btn btn-success py-2 px-3" value="Subscribe">
+				</div>
+			</form>
+		</div>
+	</div><hr class="bg-white">
+	<h4 class="text-white text-center">Copyright &copy 2020</h4>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+<script type="text/javascript" src="{%static 'foodie/js/cart.js'%}"></script>
+<script type="text/javascript">
+	{%block js%}
+
+	{%endblock%}
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+{%extends 'foodie/base.html'%}
+{%load static%}
+{%load custom_tags%}
+{%block title%}Order food online from India's best restaurant	{%endblock%}
+
+{%block body%}
+<section>
+<div class="bg-gray">
+	<div class="container">
+	<div class="row py-5">
+		{%include 'foodie/profile-sidebar.html'%}
+ 		<div class="col-lg-9 col-md-6 col-sm-12 col-12">
+			<div class="p-4 bg-white">
+				<h4 class="font-weight-bolder">Past Orders</h4>
+				<ul class="list-group">
+				{%for order, order_items in order_data.items%}
+					<li class="list-group-item mt-4 border">
+						<div class="row no-gutters">
+							<div class="col-lg-1 col-md-2 col-sm-2 col-2">
+								<a href="/foodie/restro-view/{{order_items.0.0.item.restro.id}}"><img src="/media/{{order_items.0.0.item.restro.pic}}" class="img-fluid order-restro-img"></a>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-6 pl-3">
+								<a href="/foodie/restro-view/{{order_items.0.0.item.restro.id}}" class="font-weight-bolder d-inline custom-hover-color">{{order_items.0.0.item.restro.name|title}}</a>
+								<small class="d-block text-muted"><i class="fas fa-location-arrow"></i> {{order.address.address|title}}</small>
+								<small class="text-muted"><i class="fas fa-align-justify"></i> ORDER <mark>#663487{{order.id}}</mark> | {{order.date_time}}</small>
+								<small class="mt-3 d-block">
+									{%for order_item in order_items.0%}
+										{{order_item.item.name|title}} x {{order_item.qty}}
+									{%endfor%}
+								</small>
+							</div>
+							<div class="col-lg-5 col-md-4 col-sm-12 col-12">
+								{%if order.ordered%}
+									<small class="text-info ml-lg-0 ml-md-0 ml-5 d-block">Delivered on {{order_items.1.0.date_time}}<i class="fas fa-check-circle text-success"></i></small>
+								{%elif order.cancelled%}
+									<small class="text-danger"><i class="fas fa-window-close"></i> {{order_items.1.0.desc|title}}</small>
+								{%else%}
+									{%if order_items.1.0%}
+										<small class="text-warning animated infinite flash"><i class="fas fa-check-double"></i> {{order_items.1.0.desc|title}}</small>
+									{%else%}
+										<small class="text-warning animated infinite flash"><i class="fas fa-check"></i> Waiting for Rastaurant confirmation</small>
+									{%endif%}
+										<small class="ml-2 float-right"><a href="#track-modal-{{order.id}}" class="text-danger text-decoration-none" data-toggle="modal"><i class="fas fa-motorcycle text-dark"></i> Track</a></small>
+										<small class="mt-2 d-block"><a href="/foodie/cancel-order/{{order.id}}" class="text-danger">Request for cancel Order</a></small>
+										<div class="modal" id="track-modal-{{order.id}}">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-body">
+														<div class="d-flex justify-content-between">
+															<div>
+																<small class="d-block mb-2">Order <mark>#663487{{order.id}}</mark></small>
+																<p class="d-inline font-weight-bolder">{{order_items.0.0.item.restro.name|title}}</p>
+																<small class="d-block text-muted "><i class="far fa-clock"></i> {{order.date_time}} | {{order_items.0|getItemCount}} Items | ₹{{ order_items.0| getTotal}}</small>
+															</div>
+															<div>
+																<small><a href="#" class="text-decoration-none text-danger"><i class="fas fa-headset "></i> HELP</a></small>
+															</div>
+														</div><hr class="bg-secondary">
+														<p class="font-weight-bolder">Order Details</p>
+														<div class="row mt-4">
+															<div class="col-lg-6">
+																<small class="d-block">FROM</small>
+																<p class="d-inline font-weight-bolder"><i class="fa fa-store"></i> {{order_items.0.0.item.restro.name|title}}</p>
+																<small class="d-block text-muted ml-4">{{order_items.0.0.item.restro.location|title}}
+																{{order_items.0.0.item.restro.location.city.name|title}}</small>
+																<div class="mt-4">
+																	<small class="d-block">DELIVER TO</small>
+																	<p class="d-inline font-weight-bolder"><i class="fas fa-route"></i> {{order.address.tag|title}}</p>
+																	<small class="d-block text-muted ml-3">{{order.address.address|title}}</small>
+																</div>
+															</div>
+															<div class="col-lg-6">
+																<small class="d-block">{{order_items.0|getItemCount}} ITEMS</small>
+																{%for order_item in order_items.0%}
+																	<div class="row no-gutters">
+																		<div class="col-lg-10 pr-2">
+																			<small class="text-muted">{{order_item.item.name|title}} x {{order_item.qty}}</small>
+																		</div>
+																		<div class="col-lg-2">
+																			<small class="text-muted">₹{{order_item.item.price|getItemTotal:order_item.qty}}</small>
+																		</div>	
+																	</div><hr class="my-2">
+																{%endfor%}
+																<div class="row no-gutters">
+																	<div class="col-lg-10 pr-2">
+																		<small class="font-weight-bolder">TOTAL BILL</small>
+																	</div>
+																	<div class="col-lg-2">
+																		<small class="text-muted font-weight-bolder">₹{{ order_items.0| getTotal}}</small>
+																	</div>	
+																</div>
+															</div>
+														</div>
+														<div class="row mt-5">
+															<div class="col-lg-3 text-center">
+																<i class="fas fa-clipboard-list fa-2x text-primary"></i>
+																<!--
+																<i class="fas fa-clipboard-check fa-2x text-primary"></i> -->
+																<small class="font-weight-bolder d-block">Order placed</small>
+															</div>
+															<div class="col-lg-3 text-center">
+																{%if order_items.1|update_exists:"Order Confirmed"%}
+																	{%if order_items.1.0.status == "Order Confirmed"%}
+																		<i class="far fa-check-circle fa-2x text-success animated infinite flash"></i>
+																		<small class="text-info d-block">Now</small>
+																	{%else%}
+																		<i class="far fa-check-circle fa-2x text-success"></i>
+																	{%endif%}
+																{%else%}
+																	<i class="far fa-check-circle fa-2x text-muted"></i>
+																{%endif%}
+																<small class="font-weight-bolder d-block">Order confirmed</small>
+															</div>
+															<div class="col-lg-3 text-center">
+																{%if order_items.1|update_exists:"Order Being Prepared"%}
+																	{%if order_items.1.0.status == "Order Being Prepared"%}
+																		<i class="fas fa-utensils text-warning fa-2x animated infinite flash"></i> 
+																		<small class="text-info d-block">Now</small>
+																	{%else%}
+																		<i class="fas fa-utensils text-warning fa-2x"></i> 
+																	{%endif%}
+																{%else%}
+																	<i class="fas fa-utensils fa-2x text-muted"></i> 
+																{%endif%}
+																<small class="font-weight-bolder d-block">Food being prepared</small>
+															</div>
+															<div class="col-lg-3 text-center">
+																{%if order_items.1|update_exists:"Order Pickup"%}
+																	{%if order_items.1.0.status == "Order Pickup"%}
+																		<i class="fas fa-motorcycle fa-2x text-danger animated infinite flash"></i> 
+																		<small class="text-info d-block">Now</small>
+																	{%else%}
+																		<i class="fas fa-motorcycle fa-2x text-danger"></i> 
+																	{%endif%}
+																{%else%}
+																	<i class="fas fa-motorcycle fa-2x text-muted"></i>
+																{%endif%}
+																<small class="font-weight-bolder d-block">Order picked up</small>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+								{%endif%}
+							</div>
+						</div>
+						<div class="ml-5">
+							<hr class="bg-gray">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-12 col-12">
+									<p><span class="font-weight-bolder">Total Paid:</span> <span class="text-danger">₹{{ order_items.0| getTotal}}</span></p>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-12 pl-5">
+									<a href="#" class="btn btn-outline-danger px-4 mr-3"><small><i class="fas fa-headset "></i> HELP</small></a>
+									<a href="/foodie/restro-view/{{order_items.0.0.item.restro.id}}" class="btn btn-danger px-4"><small><i class="fas fa-sync-alt"></i> REORDER</small></a>
+								</div>
+							</div>
+						</div>
+					</li>
+				{%endfor%}
+				</ul>
+			</div>
+		</div>
+</div>
+</div>
+</div>
+</section>
+{%endblock%}
+{%block js%}
+$(document).ready(function(){
+	let orders={}
+	let id=0;
+	{%for order, order_items in order_data.items%}
+		{%if not order.cancelled and not order.ordered%}
+			id={{order.id}}
+			orders[id] = {{order_items.1|length}}
+		{%endif%}
+	{%endfor%}
+	console.log(orders)
+	if(Object.keys(orders).length!=0){
+			checkUpdate();
+		}
+	function checkUpdate(){
+		$.ajax({
+		url:"/foodie/check-update",
+		type:"get",
+		data:{"data":JSON.stringify(orders)},
+		success:function(response_data){
+			console.log(response_data)
+				if(response_data["update_exists"]){
+					console.log("reloading")
+					location.reload();	
+					}
+				setTimeout(checkUpdate,2000);
+				}
+		});
+	}
+});
+{%endblock%}

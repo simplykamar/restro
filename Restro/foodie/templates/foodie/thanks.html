@@ -1,0 +1,26 @@
+{%extends 'foodie/base.html'%}
+
+{%load static%}
+
+{%block title%} Order successfully placed	{%endblock%}
+
+{%block body%}
+<section>
+<div class="bg-light">
+	<div class="text-center p-5">
+		<img src="{%static 'foodie/img/thanks.jpg'%}">
+		<h1 class="mt-5" style="color: #45cc65;">Congratulations!</h1>
+		<p class="text-muted">You have successfully placed your order</p>
+		<a href="/foodie/orders" class="btn btn-danger px-4 py-2 mt-4">View Order :)</a>
+	</div>
+
+</div>
+</section>
+
+{%endblock%}
+{%block js%}
+	{%if thanks%}
+		localStorage.clear();
+		$('#navbar-cart').html("0");
+	{%endif%}
+{%endblock%}

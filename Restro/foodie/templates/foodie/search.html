@@ -1,0 +1,56 @@
+{%extends 'foodie/base.html'%}
+
+{%load static%}
+
+{%block title%} Order food online from India's best restaurant.{{query}} in {{city}} {%endblock%}
+
+{%block body%}
+<section class="bg-light">
+		{%if result|length > 0%}
+<img src="{%static 'foodie/img/search-banner.jpg'%}" class="img-fluid search-banner">
+<div class="container my-4">
+	<h4 class="text-">"{{query}}" in {{city}}</h4>
+	
+</div>
+<div class="container pb-5">
+			<div class="row">
+				{%for restro in result%}
+					<div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-5 mb-md-0 mb-lg-0  restro-card">
+						<a href="/foodie/restro-view/{{restro.restro.id}}" class="text-dark">
+							<div class="card">
+								<img src="/media/{{restro.restro.pic}}" class="img-fluid card-img-top restro-img">
+								<div class="card-body">
+									<h5 class="card-title">{{restro.restro.name|title}}</h5>
+									<p>{{restro.restro.desc}}</p>
+									<div class="d-flex justify-content-between">
+										{%if restro.restro.rating > 3.8%}
+											<span class="badge badge-success">
+										{%else%}
+											<span class="badge badge-danger">
+										{%endif%}
+											<i class="fas fa-star"></i> {{restro.restro.rating}}
+											</span>
+										<span> - </span>
+										<span>₹{{restro.restro.price_for_two}} For Two</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					{%if forloop.counter|divisibleby:3 and not forloop.last%}
+						</div><div class="row mt-5">
+					{%endif%}
+				{%endfor%}
+			</div>
+</div>
+		{%else%}
+		<div class="p-5 text-center">
+			<img src="{% static 'foodie/img/not-found.jpg'%}" class="img-fluid">
+			<h4 class="my-2">Oh! There’s not much left</h4>
+			<p class="text-muted">We can’t find anything related to your search.<br>
+				Try a different search.</p>
+		</div>
+		{%endif%}
+</section>
+
+{%endblock%}

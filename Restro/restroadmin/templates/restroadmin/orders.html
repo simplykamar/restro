@@ -1,0 +1,66 @@
+{%extends 'restroadmin/base.html'%}
+
+{%block title%}	{%endblock%}
+
+{%block body%}
+<div class="p-5 bg-gray">
+	<div class="p-5 bg-white">
+		<form class="form-inline mb-5 float-right" action="/restaurant/orders/" method="post">{%csrf_token%}
+			<input type="search" name="search" placeholder="Search by Order Id" class="form-control">
+			<input type="submit" class="btn btn-success" value="Search">
+		</form>
+		{%if invalid_search%}
+		<h4 class="text-danger">Order ID not Found</h4>
+		<a href="/restaurant/orders">Go Back</a>
+		{%else%}
+		<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr><th colspan="5" class="text-center text-primary">
+					{%if valid_search%}
+					<h4 class="text-success">Found</h4>
+					{%else%}
+					<h4>All orders</h4>
+					{%endif%}
+				</th></tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>#Order Number</th>
+					<th>Status</th>
+					<th>Remark</th>
+					<th>Order Placed Date</th>
+					<th>View</th>
+				</tr>
+				{%for order_received,order_update in data.items%}
+				<tr>
+					<td><mark>#663487{{order_received.order.id}}</mark></td>
+					{%if not order_update|length%}
+						<td>wait for restaurant approval</td>
+					{%else%}
+						<td>{{order_update.0.status}}
+						{%if order_received.order.cancelled%}	
+						<i class="fas fa-window-close text-danger float-right mr-5"></i>
+						{%elif order_received.order.ordered%}
+							<i class="fas fa-check-circle text-success float-right mr-5"></i>
+						{%elif order_update.0.status == "Order Pickup"%}
+							<i class="fas fa-motorcycle text-warning float-right mr-5 animated infinite flash"></i>
+						{%else%}
+							<i class="fas fa-utensils text-warning float-right mr-5 animated infinite flash"></i>
+						{%endif%}
+						</td>
+					{%endif%}
+					<td>{{order_update.0.desc|title}}</td>
+					<td>{{order_received.order.date_time}}</td>
+					<td><a href="/restaurant/order-detail/{{order_received.id}}">View Order</a></td>
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+	</div>
+		{%endif%}
+	</div>
+</div>
+
+{%endblock%}
+
