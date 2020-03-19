@@ -1,6 +1,6 @@
 {%extends 'restroadmin/base.html'%}
 
-{%block title%}	{%endblock%}
+{%block title%}	{{request.user.restroprofile.restro.name|title}} manage orders {%endblock%}
 
 {%block body%}
 <div class="p-5 bg-gray">

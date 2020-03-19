@@ -1,6 +1,6 @@
 {%extends "restroadmin/base.html"%}
 
-{%block title%}	{%endblock%}
+{%block title%}{{request.user.restroprofile.restro.name|title}} Dashboard{%endblock%}
 
 {%block dashboard-active%}active{%endblock%}
 

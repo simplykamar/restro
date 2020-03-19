@@ -25,7 +25,7 @@ SECRET_KEY = 'yt^c1dcb$iziq)p=d6%b9!qpt7_^xb7(5qgy+624hs)_m3_mz+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['restro.pythonanywhere.com']
 AUTHENTICATION_BACKENDS=[
             'django.contrib.auth.backends.ModelBackend',
             'account.backend.CustomEmailBackend',

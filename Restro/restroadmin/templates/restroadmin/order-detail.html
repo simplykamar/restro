@@ -1,6 +1,6 @@
 {%extends "restroadmin/base.html"%}
 {%load custom_tags%}
-{%block title%}	{%endblock%}
+{%block title%} {{request.user.restroprofile.restro.name|title}} manage orders{%endblock%}
 
 {%block body%}
 
