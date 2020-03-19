@@ -14,7 +14,7 @@ def login(req):
 		if user is not None:
 			auth.login(req,user)
 			return redirect("/foodie")
-		else:messages.error(req,"User Not Found")
+		else:messages.error(req,"Invalid email or password")
 	return render(req,"account/login.html")
 def logout(req):
 	if req.user.is_authenticated:

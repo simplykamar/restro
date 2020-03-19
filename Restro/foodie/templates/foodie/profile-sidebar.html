@@ -4,9 +4,9 @@
 					<div class="px-5 pt-5 text-center">
 						<i class="fas fa-user fa-5x
 						 "></i>
-						<small class="font-weight-bolder mt-3 d-block">Abhishek Sharma</small>
-						<small class="text-muted d-block">+91 9045371255</small>
-						<small class="text-muted d-block">abhishek@123gmail.com</small>
+						<small class="font-weight-bolder mt-3 d-block">{{request.user.username|title}}</small>
+						<small class="text-muted d-block">+91 {{request.user.profile.tel}}</small>
+						<small class="text-muted d-block">{{request.user.email}}</small>
 						<a href="#" class="font-weight-bolder text-decoration-none text-danger"><i class="fas fa-pencil-alt mt-3"></i> Edit</a>
 					</div><hr>
 					<div class="pl-3 pb-3 mt-4 custom-active">
