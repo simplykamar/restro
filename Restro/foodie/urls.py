@@ -18,4 +18,6 @@ urlpatterns = [
 		path('404',views.error_404),
 		path('cancel-order/<int:id>',views.cancel_order),
 		path('check-update/',views.check_update),
+		path('location-based-restaurant/<int:id>',views.location_based_restaurant),
+		path('city-based-restaurant/<int:id>',views.city_based_restaurant),
 ]

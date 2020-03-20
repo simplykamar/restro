@@ -27,6 +27,14 @@ def check_restro(restro_item,search_result):
 def error_404(req):
 	return render(req,"foodie/404.html")
 
+def city_based_restaurant(req,id):
+	restro=Restro.objects.filter(location__city__id=id)
+	return render(req,"foodie/restaurant.html",{"result":restro,"is_city_based":True})
+
+def location_based_restaurant(req,id):
+	restro=Restro.objects.filter(location__id=id)
+	return render(req,"foodie/restaurant.html",{"result":restro})
+
 def search(req):
 	if req.method=="POST":
 		search_query=req.POST['search'].lower().split()

@@ -6,7 +6,12 @@
 {%block body%}
 <section>
 <div class="container-fluid">
-	<small class="font-weight-bolder m-0 text-dark bg-light">Home / {{restro_item.0.restro.location.city.name|title}} / <span id="get-restro-location">{{restro_item.0.restro.location.name|title}}</span> / <a href="/foodie/restro-view/{{restro_item.0.restro.id}}/" class="text-dark" id="get-restro-name">{{restro_item.0.restro.name|title}}</a></small>
+	<small class="font-weight-bolder m-0 text-dark bg-light">
+		<a href="/foodie" class="text-dark">Home</a> / 
+		<a href="/foodie/city-based-restaurant/{{restro_item.0.restro.location.city.id}}" class="text-dark">{{restro_item.0.restro.location.city.name|title}}</a> / 
+		<a href="/foodie/location-based-restaurant/{{restro_item.0.restro.location.id}}" class="text-dark">
+		<span id="get-restro-location">{{restro_item.0.restro.location.name|title}}</span></a> / 
+		<span id="get-restro-name">{{restro_item.0.restro.name|title}}</span></a></small>
 </div>
 <input type="hidden" id="get-restro-id" value="{{restro_item.0.restro.id}}">
 <main class="mb-5">
