@@ -6,9 +6,9 @@
 {%block body%}
 <section>
 <div id="checkout-cart-empty" class="text-center p-5">  </div>
-<div class="bg-gray p-4" id="checkout-cart-available">
+<div class="bg-gray p-lg-4" id="checkout-cart-available">
 	<div class="row">
-		<div class="col-lg-8"> 
+		<div class="col-lg-8">
 			<div class="container">
 				<a href="/foodie/checkout-step-1" class="text-dark text-decoration-none">
 				<div class="bg-white p-4 d-flex justify-content-between">
@@ -33,7 +33,7 @@
 				</a>
 				<div class="bg-white p-4 mt-3">
 					<h4>Choose payment method</h4>
-					<p>Accepted Cards</p>	
+					<p>Accepted Cards</p>
 					<i class="fab fa-cc-visa fa-2x text-primary"></i>
 					<i class="fab fa-cc-paypal fa-2x mx-2 text-success"></i>
 					<i class="fas fa-credit-card fa-2x text-danger" ></i>
@@ -52,6 +52,10 @@
 					          <div class="custom-control custom-radio">
 					            <input id="paypal" name="payment-mode" type="radio" class="custom-control-input" required="" value="paypal">
 					            <label class="custom-control-label" for="paypal">PayPal</label>
+					          </div>
+					          <div class="custom-control custom-radio">
+					            <input id="cash" name="payment-mode" type="radio" class="custom-control-input" required="" value="cash">
+					            <label class="custom-control-label" for="cash">Cash</label>
 					          </div>
 					        </div>
 					        <div class="row">

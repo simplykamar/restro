@@ -1,4 +1,4 @@
-										
+
 				// Get cart if available otherwise initialize empty cart
 
 if (localStorage.getItem('cart')==null){
@@ -15,7 +15,7 @@ if (localStorage.getItem('cart')==null){
 			<br><small><a href="/foodie/restro-view/${restr_id}" class="text-capitalize">${restr_name}</a></small><span class="clear-cart float-right text-danger cursor-pointer"><i class="far fa-trash-alt"></i>Clear cart</span></p>`)
 	}
 }
-				//If someone click cart class then fetch click Item ID, Name,Price...and append in to cart 
+				//If someone click cart class then fetch click Item ID, Name,Price...and append in to cart
 				//If fetch Item ID available in cart then Increament Item qty by one
 $(document).on('click','.clear-cart',function(){
 	localStorage.clear();
@@ -56,7 +56,7 @@ $(document).on('click','.cart',function(){
 		updateCart(cart);
 		}else{
 			alert("Your cart contains items from other restaurant. Clear your cart for adding fresh items from this restaurant?")
-		}	
+		}
 });
 					//If quantity of item is 0 then show ADD btn other show plus, minus btn
 
@@ -100,7 +100,7 @@ function sidebarCart(cart){
 	//if cart length == 0 then show empty cart otherwise show cart
 	$('#navbar-cart').html(countItem(cart));
 	if (Object.keys(cart).length==0) {
-		//if cart not exist then hide .cart-availbale class, this class used in both restro_view and checkout page 		
+		//if cart not exist then hide .cart-availbale class, this class used in both restro_view and checkout page
 		$('.cart-available').hide();
 		$('#checkout-cart-available').hide();
 		$('#checkout-cart-empty').show();
@@ -123,14 +123,14 @@ function sidebarCart(cart){
 	}else{
 
 		$('#checkout-cart-empty').hide();
-		//if cart available then show .cart-availbale class, this class used in both restro_view and checkout page 
-		//if cart available then only show and set item restro img and location in checkout sidebar cart 
+		//if cart available then show .cart-availbale class, this class used in both restro_view and checkout page
+		//if cart available then only show and set item restro img and location in checkout sidebar cart
 		$('.cart-available').show();
 		$('#set-restro-name').html(cart[Object.keys(cart)[0]]["restro_name"]);
 		$('#set-restro-location').html(cart[Object.keys(cart)[0]]["restro_location"]);
-		$('#set-checkout-cart-link').attr( 'href', '/foodie/restro-view/' + cart[Object.keys(cart)[0]]["restro_id"]);	
+		$('#set-checkout-cart-link').attr( 'href', '/foodie/restro-view/' + cart[Object.keys(cart)[0]]["restro_id"]);
 		$('.checkout-cart-img').attr('src',cart[Object.keys(cart)[0]]["restro_img"]);
-		
+
 		console.log("cart not work");
 		console.log(Object.keys(cart).length+" "+cart);
 		let carttotal=0;
@@ -155,6 +155,7 @@ function sidebarCart(cart){
 				carttotal+=cart[item]["price"]*cart[item]["qty"];
 	}
 	$('#carttotal').html(carttotal);
+	$('.carttotal2').html(carttotal);
 	$('#cartitem').html(countItem(cart)+" Items");
 }
  }

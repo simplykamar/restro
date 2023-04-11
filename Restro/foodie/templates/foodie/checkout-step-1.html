@@ -7,18 +7,17 @@
 {%block body%}
 <!-- if cart empty than only show-->
 <div id="checkout-cart-empty" class="text-center p-5">  </div>
-<div class="bg-gray p-4" id="checkout-cart-available">
+<div class="bg-gray p-lg-4" id="checkout-cart-available">
 <div class="my-5 container">
 	<div class="row">
 		<div class="col-lg-8 col-md-6 col-sm-12 col-12  bg-white p-5">
 			<h2>Choose a delivery address</h2>
-			<p class="text-muted font-weight-bolder">Multiple addresses in this location</p>
-			<div class="row">
+	        <div class="row">
 				{%for add in address%}
 					{%if add.tag == "home"%}
 					<div class="col-lg-6">
 						<a href="/foodie/checkout-step-2/{{add.id}}" class="text-decoration-none text-dark">
-							<div class="border p-4 address shadow"> 
+							<div class="border p-4 address shadow">
 								<p class="d-inline font-weight-bolder"><i class="fas fa-home mr-3"></i> Home</p>
 								<p class="text-muted">{{add.address}}</p>
 								<button class="btn btn-success mt-4">DELIVER HERE</button>

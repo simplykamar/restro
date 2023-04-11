@@ -8,11 +8,11 @@
 <div id="cover" class="p-5">
 	<div class="text-center">
 		<img src="{%static 'foodie/img/logo.jpg'%}" class="cover_logo">
-		<h4 class="text-white my-4">Find Your Favroite Delicious hot Food..!</h4>	
+		<h4 class="text-white my-4">Find Your Favourite Delicious hot Food..!</h4>
 		<form action="search/" method="post">{%csrf_token%}
 			<select class="form-control-lg col-lg-2 col-md-2 col-sm-12 col-12" name="city">
 				{%for c in city%}
-					<option>{{c.name}}</option>
+					<option>{{c.name|title}}</option>
 				{%endfor%}
 			</select>
 			<input type="search" name="search" class="form-control-lg col-lg-4 col-md-4 col-sm-12 col-12 my-2" required="true">
@@ -33,7 +33,7 @@
 </section>
 
 <section>
-	<div class="bg-light p-5">
+	<div class="bg-light p-5 d-none d-lg-block">
 		<div class="carousel slide container" data-ride="carousel" id="mycarousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">

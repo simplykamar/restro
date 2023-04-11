@@ -45,6 +45,12 @@
 										<div class="modal" id="track-modal-{{order.id}}">
 											<div class="modal-dialog">
 												<div class="modal-content">
+												    <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 													<div class="modal-body">
 														<div class="d-flex justify-content-between">
 															<div>
@@ -78,7 +84,7 @@
 																		</div>
 																		<div class="col-lg-2">
 																			<small class="text-muted">₹{{order_item.item.price|getItemTotal:order_item.qty}}</small>
-																		</div>	
+																		</div>
 																	</div><hr class="my-2">
 																{%endfor%}
 																<div class="row no-gutters">
@@ -87,18 +93,18 @@
 																	</div>
 																	<div class="col-lg-2">
 																		<small class="text-muted font-weight-bolder">₹{{ order_items.0| getTotal}}</small>
-																	</div>	
+																	</div>
 																</div>
 															</div>
 														</div>
 														<div class="row mt-5">
-															<div class="col-lg-3 text-center">
+															<div class="col-lg-3 col-3 text-center">
 																<i class="fas fa-clipboard-list fa-2x text-primary"></i>
 																<!--
 																<i class="fas fa-clipboard-check fa-2x text-primary"></i> -->
 																<small class="font-weight-bolder d-block">Order placed</small>
 															</div>
-															<div class="col-lg-3 text-center">
+															<div class="col-lg-3 col-3 text-center">
 																{%if order_items.1|update_exists:"Order Confirmed"%}
 																	{%if order_items.1.0.status == "Order Confirmed"%}
 																		<i class="far fa-check-circle fa-2x text-success animated infinite flash"></i>
@@ -111,26 +117,26 @@
 																{%endif%}
 																<small class="font-weight-bolder d-block">Order confirmed</small>
 															</div>
-															<div class="col-lg-3 text-center">
+															<div class="col-lg-3 col-3 text-center">
 																{%if order_items.1|update_exists:"Order Being Prepared"%}
 																	{%if order_items.1.0.status == "Order Being Prepared"%}
-																		<i class="fas fa-utensils text-warning fa-2x animated infinite flash"></i> 
+																		<i class="fas fa-utensils text-warning fa-2x animated infinite flash"></i>
 																		<small class="text-info d-block">Now</small>
 																	{%else%}
-																		<i class="fas fa-utensils text-warning fa-2x"></i> 
+																		<i class="fas fa-utensils text-warning fa-2x"></i>
 																	{%endif%}
 																{%else%}
-																	<i class="fas fa-utensils fa-2x text-muted"></i> 
+																	<i class="fas fa-utensils fa-2x text-muted"></i>
 																{%endif%}
 																<small class="font-weight-bolder d-block">Food being prepared</small>
 															</div>
-															<div class="col-lg-3 text-center">
+															<div class="col-lg-3 col-3 text-center">
 																{%if order_items.1|update_exists:"Order Pickup"%}
 																	{%if order_items.1.0.status == "Order Pickup"%}
-																		<i class="fas fa-motorcycle fa-2x text-danger animated infinite flash"></i> 
+																		<i class="fas fa-motorcycle fa-2x text-danger animated infinite flash"></i>
 																		<small class="text-info d-block">Now</small>
 																	{%else%}
-																		<i class="fas fa-motorcycle fa-2x text-danger"></i> 
+																		<i class="fas fa-motorcycle fa-2x text-danger"></i>
 																	{%endif%}
 																{%else%}
 																	<i class="fas fa-motorcycle fa-2x text-muted"></i>
@@ -152,8 +158,11 @@
 									<p><span class="font-weight-bolder">Total Paid:</span> <span class="text-danger">₹{{ order_items.0| getTotal}}</span></p>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12 col-12 pl-5">
+								    <div class="d-flex justify-content-between">
+
 									<a href="#" class="btn btn-outline-danger px-4 mr-3"><small><i class="fas fa-headset "></i> HELP</small></a>
 									<a href="/foodie/restro-view/{{order_items.0.0.item.restro.id}}" class="btn btn-danger px-4"><small><i class="fas fa-sync-alt"></i> REORDER</small></a>
+								    </div>
 								</div>
 							</div>
 						</div>
@@ -190,7 +199,7 @@ $(document).ready(function(){
 			console.log(response_data)
 				if(response_data["update_exists"]){
 					console.log("reloading")
-					location.reload();	
+					location.reload();
 					}
 				setTimeout(checkUpdate,2000);
 				}
